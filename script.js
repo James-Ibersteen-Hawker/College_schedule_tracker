@@ -4,6 +4,7 @@ const name = document.querySelector("#name");
 const room = document.querySelector("#room");
 const teacher = document.querySelector("#teacher");
 const building = document.querySelector("#buildings");
+const timeupdatedelay = 5000;
 function temp(event) {
     event.preventDefault();
     const RESPONSE = {
@@ -16,5 +17,13 @@ function temp(event) {
 }
 function startup() {
     form.addEventListener("submit", temp);
+    CLOCK();
 }
 startup();
+
+function CLOCK() {
+    const clockinterval = setInterval(() => {
+        console.log("clock");
+        const timenow = new Date();
+    }, timeupdatedelay)
+}
