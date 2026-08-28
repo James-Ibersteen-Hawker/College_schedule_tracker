@@ -1,4 +1,5 @@
 "use strict";
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbxWzDUvP26rVSbokwWFmjCSyCVR3FFVu_smc68eQboqrlVLMCSvqhh51HJqx0gnZitIqA/exec"
 const form = document.querySelector("#_classInput");
 const name = document.querySelector("#name");
 const room = document.querySelector("#room");
@@ -12,7 +13,7 @@ const TIMEKEY = "time";
 const timeOpened = new Date();
 const dayOpened = timeOpened.getDay();
 let timeNow;
-function SAVE(event) {
+async function SAVE(event) {
     event.preventDefault();
     const RESPONSE = {
         name: name.value,
@@ -24,6 +25,17 @@ function SAVE(event) {
         days: days.filter(e => e.checked).map(e => e.value)
     }
     console.log(RESPONSE)
+    try {
+        const result = await fetch(ENDPOINT, {
+            method: 'POST',
+            headers: { "Content-Type": 'text/plain' },
+            body: JSON.stringify(RESPONSE)
+        });
+        if (!result.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        const data = await result.json();
+    } catch (err) {
+        throw new Error("Error sending POST request: ", err)
+    }
 }
 async function optionpopulate() {
     const classlist = await (await fetch("./classlist.json")).json();
@@ -63,6 +75,6 @@ function CLOCK() {
 function ping() { //every clock cycle, the website performs a "ping" to see if the time / schedule need to change
     const timeNow = new Date();
     const dayNow = timeNow.getDay();
-    if (dayNow !== dayOpened) {/* refresh schedule */}
+    if (dayNow !== dayOpened) {/* refresh schedule */ }
 }
 startup();
