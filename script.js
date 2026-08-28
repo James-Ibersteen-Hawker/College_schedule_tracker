@@ -3,7 +3,7 @@ const form = document.querySelector("#_classInput");
 const name = document.querySelector("#name");
 const room = document.querySelector("#room");
 const teacher = document.querySelector("#teacher");
-const building = document.querySelector("#buildings");
+const buildings = document.querySelector("#buildings");
 const timeupdatedelay = 5000;
 function temp(event) {
     event.preventDefault();
@@ -11,11 +11,19 @@ function temp(event) {
         name: name.value,
         room: room.value,
         teacher: teacher.value,
-        building: building.value
+        building: buildings.value
     }
     console.log(RESPONSE)
 }
-function startup() {
+async function startup() {
+    const classlist = await (await fetch("./classlist.json")).json();
+    classlist.forEach(e => {
+        console.log(e);
+        const option = document.createElement("option");
+        option.value = e.number;
+        option.textContent = e.name;
+        buildings.append(option)
+    })
     form.addEventListener("submit", temp);
     CLOCK();
 }
