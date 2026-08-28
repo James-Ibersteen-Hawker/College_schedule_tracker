@@ -1,23 +1,77 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <title>College Viewer</title>
-    </head>
-    <body>
-        <main id="_vueapp">
-            <form id="_classInput">
-                <label for="name">Class Name</label>
-                <input name="name" id="name" type="text" placeholder="Enter name here..." required><br>
-                <label for="room">Class Room</label>
-                <input name="room" id="room" type="text" placeholder="Enter room here..." required><br>
-                <label for="teacher">Teacher</label>
-                <input name="teacher" id="teacher" type="text" placeholder="Enter teacher here..." required><br>
-                <label for="building">Building</label>
-                <select id="buildings" required>
-                </select><br>
-                <input type="submit">
-            </form>
-        </main>
-        <script type="module" src="script.js"></script>
-    </body>
+  <head>
+    <title>College Viewer</title>
+  </head>
+  <body>
+    <main id="_vueapp">
+      <form id="_classInput">
+        <div>
+          <label for="name">Class Name</label>
+          <input
+            name="name"
+            id="name"
+            type="text"
+            placeholder="Enter name here..."
+            required
+          />
+        </div>
+        <div>
+          <label for="room">Class Room</label>
+          <input
+            name="room"
+            id="room"
+            type="text"
+            placeholder="Enter room here..."
+            required
+          />
+        </div>
+        <div>
+          <label for="teacher">Teacher</label>
+          <input
+            name="teacher"
+            id="teacher"
+            type="text"
+            placeholder="Enter teacher here..."
+            required
+          />
+        </div>
+        <div>
+          <label for="building">Building</label>
+          <select id="buildings" required></select>
+        </div>
+        <div>
+          <label for="start">Start Time</label>
+          <input name="start" id="start" type="time" required />
+        </div>
+        <div>
+          <label for="end">End Time</label>
+          <input name="end" id="end" type="time" required />
+        </div>
+        <legend>Days</legend>
+        <div>
+          <input type="checkbox" name="mon" value="0" class="days"/>
+          <label for="mon">Monday</label>
+        </div>
+        <div>
+          <input type="checkbox" name="tues" value="1" class="days"/>
+          <label for="tues">Tuesday</label>
+        </div>
+        <div>
+          <input type="checkbox" name="wed" value="2" class="days"/>
+          <label for="wed">Wednesday</label>
+        </div>
+        <div>
+          <input type="checkbox" name="thurs" value="3" class="days"/>
+          <label for="thurs">Thursday</label>
+        </div>
+        <div>
+          <input type="checkbox" name="fri" value="4" class="days"/>
+          <label for="fri">Friday</label>
+        </div>
+        <input type="submit" />
+      </form>
+    </main>
+    <script type="module" src="script.js"></script>
+  </body>
 </html>
