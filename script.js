@@ -9,9 +9,8 @@ const end = document.querySelector("#end");
 const days = Array.from(document.querySelectorAll(".days"))
 
 const timeupdatedelay = 5000;
-function temp(event) {
+function SAVE(event) {
     event.preventDefault();
-    console.log(days)
     const RESPONSE = {
         name: name.value,
         room: room.value,
@@ -34,7 +33,7 @@ async function optionpopulate() {
 }
 async function startup() {
     await optionpopulate()
-    form.addEventListener("submit", temp);
+    form.addEventListener("submit", SAVE);
     CLOCK();
 }
 function CLOCK() {
