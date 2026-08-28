@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Golisano Hall",
+        "abbreviation": "GOL",
+        "number": 41
+    },
+    {
+        "name": "Frank E. Gannet Hall",
+        "abbreviation": "GAN",
+        "number": 13
+    },
+    {
+        "name": "Wallace Library",
+        "abbreviation": "WAL",
+        "number": 5
+    },
+    {
+        "name": "Liberal Arts Hall",
+        "abbreviation": "LBR",
+        "number": 12
+    },
+    {
+        "name": "MAGIC Spell Studios",
+        "abbreviation": "MSS",
+        "number": 2265
+    },
+    {
+        "name": "Chester F. Carlson Imaging Center",
+        "abbreviation": "CAR",
+        "number": 44
+    },
+    {
+        "name": "Hale-Andrews Student Life Center",
+        "abbreviation": "HAC",
+        "number": 29
+    }
+]
