@@ -31,10 +31,10 @@ async function SAVE(event) {
             headers: { "Content-Type": 'text/plain' },
             body: JSON.stringify(RESPONSE)
         });
-        if (!result.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        if (!result.ok) throw new Error(`HTTP error! Status: ${result.status}`);
         const data = await result.json();
     } catch (err) {
-        throw new Error("Error sending POST request: ", err)
+        console.error(`Error sending POST request: ${err}`)
     }
 }
 async function optionpopulate() {
