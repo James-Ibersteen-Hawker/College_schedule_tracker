@@ -15,8 +15,10 @@ const buildings = document.querySelector("#buildings");
 const start = document.querySelector("#start");
 const end = document.querySelector("#end");
 const days = Array.from(document.querySelectorAll(".days"));
-const schedName = document.querySelector("#_scheduleName");
+const schedName = document.querySelector("#scheduleName");
+const submitBtn = document.querySelector("#submitSchedule");
 const cart = document.querySelector("#_classList");
+const cartlist = new Map();
 const cartTemplate = (obj, id) => `
 <div class="cartItem" id="_${id}">
 ${JSON.stringify(obj)}
@@ -34,7 +36,7 @@ function* id() {
     while (true) yield i++;
 }
 const iterator = id();
-async function SAVE(event) {
+function ADD(event) {
     event.preventDefault();
     const checked = days.filter(e => e.checked).map(e => e.value);
     if (checked.length === 0) {
@@ -53,13 +55,27 @@ async function SAVE(event) {
     const NextId = iterator.next().value;
     const item = cartTemplate(RESPONSE, NextId);
     cart.insertAdjacentHTML("beforeend", item);
+    cartlist.set(NextId, RESPONSE);
     const button = document.querySelector(`#button_${NextId}`);
-    button.addEventListener("click", () => removeClass(NextId))
+    button.addEventListener("click", () => removeClass(NextId));
 }
 function removeClass(id) {
     const element = document.querySelector(`#_${id}`);
     element.remove();
+    cartlist.delete(id);
 }
+async function SAVE() {
+    if (cartlist.size === 0) alert("Please add classes to your schedule.");
+    else if (!confirm("Are you sure you want to finalize the schedule?")) return;
+    const SCHEDNAME = schedName.value;
+    console.log(SCHEDNAME)
+}
+
+
+
+
+
+
 async function optionpopulate() {
     const classlist = await (await fetch("./classlist.json")).json();
     classlist.forEach(e => {
@@ -86,7 +102,8 @@ async function startup() {
     //     }
     // }
     // localStorage.setItem(TIMEKEY, dayOpened); //save the new time
-    form.addEventListener("submit", SAVE);
+    form.addEventListener("submit", ADD);
+    submitBtn.addEventListener("click", SAVE);
     CLOCK();
 }
 function CLOCK() {
