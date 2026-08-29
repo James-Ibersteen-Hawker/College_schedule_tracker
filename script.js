@@ -40,23 +40,7 @@ async function SAVE(event) {
         building: buildings.value,
         start: start.value,
         end: end.value,
-<<<<<<< HEAD
         days: checked
-=======
-        days: days.filter(e => e.checked).map(e => e.value)
-    }
-    console.log(RESPONSE)
-    try {
-        const result = await fetch(ENDPOINT, {
-            method: 'POST',
-            headers: { "Content-Type": 'text/plain' },
-            body: JSON.stringify(RESPONSE)
-        });
-        if (!result.ok) throw new Error(`HTTP error! Status: ${result.status}`);
-        const data = await result.json();
-    } catch (err) {
-        console.error(`Error sending POST request: ${err}`)
->>>>>>> 4fb260a484813de598766be6532c8d3d85c87fff
     }
     const item = cartTemplate(RESPONSE, iterator.next().value);
     cart.insertAdjacentHTML("beforeend", item);
