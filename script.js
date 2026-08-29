@@ -1,5 +1,12 @@
 "use strict";
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbxWzDUvP26rVSbokwWFmjCSyCVR3FFVu_smc68eQboqrlVLMCSvqhh51HJqx0gnZitIqA/exec"
+const weekdays = [
+    "Monday",
+    "Tuesday", 
+    "Wednesday",
+    "Thursday",
+    "Friday"
+]
 const form = document.querySelector("#_classInput");
 const name = document.querySelector("#name");
 const room = document.querySelector("#room");
@@ -13,6 +20,7 @@ const cart = document.querySelector("#_classList");
 const cartTemplate = (obj, id) => `
 <div class="cartItem" id="_${id}">
 ${JSON.stringify(obj)}
+<button id="button_${id}">X</button>
 </div>
 `
 
@@ -42,8 +50,15 @@ async function SAVE(event) {
         end: end.value,
         days: checked
     }
-    const item = cartTemplate(RESPONSE, iterator.next().value);
+    const NextId = iterator.next().value;
+    const item = cartTemplate(RESPONSE, NextId);
     cart.insertAdjacentHTML("beforeend", item);
+    const button = document.querySelector(`#button_${NextId}`);
+    button.addEventListener("click", () => removeClass(NextId))
+}
+function removeClass(id) {
+    const element = document.querySelector(`#_${id}`);
+    element.remove();
 }
 async function optionpopulate() {
     const classlist = await (await fetch("./classlist.json")).json();
