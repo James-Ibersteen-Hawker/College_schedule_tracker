@@ -68,7 +68,22 @@ async function SAVE() {
     if (cartlist.size === 0) alert("Please add classes to your schedule.");
     else if (!confirm("Are you sure you want to finalize the schedule?")) return;
     const SCHEDNAME = schedName.value;
-    console.log(SCHEDNAME)
+    const SCHEDULE = {
+        name: SCHEDNAME,
+        classes: Array.from(cartlist.values())
+    }
+    try {
+        const result = await fetch(ENDPOINT, {
+            method: 'POST',
+            headers: { "Content-Type": 'text/plain' },
+            body: JSON.stringify(SCHEDULE)
+        });
+        console.log(result)
+        if (!result.ok) throw new Error(`HTTP error! Status: ${result.status}`);
+        const data = await result.json();
+    } catch (err) {
+        throw new Error("Error sending POST request: ", err)
+    }
 }
 
 
@@ -118,19 +133,3 @@ function ping() { //every clock cycle, the website performs a "ping" to see if t
     // if (dayNow !== dayOpened) {/* refresh schedule */ }
 }
 startup();
-
-
-/*
-// console.log(RESPONSE)
-    // try {
-    //     const result = await fetch(ENDPOINT, {
-    //         method: 'POST',
-    //         headers: { "Content-Type": 'text/plain' },
-    //         body: JSON.stringify(RESPONSE)
-    //     });
-    //     if (!result.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-    //     const data = await result.json();
-    // } catch (err) {
-    //     throw new Error("Error sending POST request: ", err)
-    // }
-*/
